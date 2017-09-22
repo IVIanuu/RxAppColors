@@ -29,6 +29,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.v7.graphics.Palette;
+import android.util.Log;
 
 import io.reactivex.Maybe;
 import io.reactivex.MaybeEmitter;
@@ -45,7 +46,7 @@ final class GetColorForPackageMaybe implements MaybeOnSubscribe<Integer> {
     private static final String LOLLIPOP_COLOR_PRIMARY = "android:colorPrimary";
 
     private static final int DEFAULT_GREY_LIGHT = Color.parseColor("#F5F5F5");
-    private static final int DEFAULT_GREY_DARK = Color.parseColor("#212121");
+    private static final int DEFAULT_GREY_DARK = Color.parseColor("#222222");
 
     private final PackageManager packageManager;
     private final String packageName;
@@ -71,6 +72,7 @@ final class GetColorForPackageMaybe implements MaybeOnSubscribe<Integer> {
         if (resources == null
                 && !e.isDisposed()) {
             e.onComplete();
+            log("resources null");
             return;
         }
 
@@ -86,6 +88,7 @@ final class GetColorForPackageMaybe implements MaybeOnSubscribe<Integer> {
                     int color = getColorFromTheme(activityInfo.theme, appCompatId, resources);
                     if (isValidColor(color)
                             && !e.isDisposed()) {
+                        log("use app compat activity");
                         e.onSuccess(color);
                         e.onComplete();
                         return;
@@ -97,6 +100,7 @@ final class GetColorForPackageMaybe implements MaybeOnSubscribe<Integer> {
                     int color = getColorFromTheme(activityInfo.theme, lollipopId, resources);
                     if (isValidColor(color)
                             && !e.isDisposed()) {
+                        log("use lollipop activity");
                         e.onSuccess(color);
                         e.onComplete();
                         return;
@@ -114,6 +118,7 @@ final class GetColorForPackageMaybe implements MaybeOnSubscribe<Integer> {
                 int color = getColorFromTheme(applicationInfo.theme, appCompatId, resources);
                 if (isValidColor(color)
                         && !e.isDisposed()) {
+                    log("use app compat app");
                     e.onSuccess(color);
                     e.onComplete();
                     return;
@@ -125,6 +130,7 @@ final class GetColorForPackageMaybe implements MaybeOnSubscribe<Integer> {
                 int color = getColorFromTheme(applicationInfo.theme, lollipopId, resources);
                 if (isValidColor(color)
                         && !e.isDisposed()) {
+                    log("use lollipop app");
                     e.onSuccess(color);
                     e.onComplete();
                     return;
@@ -144,8 +150,10 @@ final class GetColorForPackageMaybe implements MaybeOnSubscribe<Integer> {
 
             if (isValidColor(color)
                     && !e.isDisposed()) {
+                log("use app icon");
                 e.onSuccess(color);
                 e.onComplete();
+                return;
             }
         }
 
@@ -167,5 +175,9 @@ final class GetColorForPackageMaybe implements MaybeOnSubscribe<Integer> {
 
     private boolean isValidColor(int color) {
         return color != 0 && color != DEFAULT_GREY_LIGHT && color != DEFAULT_GREY_DARK;
+    }
+
+    private void log(String message, Object... args) {
+        Log.d("testt", String.format(message, args));
     }
 }

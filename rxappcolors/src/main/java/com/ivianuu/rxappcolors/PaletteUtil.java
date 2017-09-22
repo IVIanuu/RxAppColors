@@ -40,8 +40,8 @@ final class PaletteUtil {
      */
     @ColorInt
     static int getBestColor(@NonNull Palette palette, @ColorInt int fallbackColor) {
-        if (palette.getDarkVibrantSwatch() != null) {
-            return palette.getDarkVibrantSwatch().getRgb();
+        if (palette.getVibrantSwatch() != null) {
+            return palette.getVibrantSwatch().getRgb();
         } else if (palette.getMutedSwatch() != null) {
             return palette.getMutedSwatch().getRgb();
         } else if (palette.getDarkVibrantSwatch() != null) {

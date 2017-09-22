@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(frameLayout, new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
-        RxAppColors.getColor(this, "com.ivianuu.halo")
+        RxAppColors.getColor(this, "com.android.vending")
                 .subscribe(frameLayout::setBackgroundColor);
     }
 }
