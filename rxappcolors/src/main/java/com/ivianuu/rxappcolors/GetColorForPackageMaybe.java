@@ -46,7 +46,7 @@ final class GetColorForPackageMaybe implements MaybeOnSubscribe<Integer> {
     private static final String LOLLIPOP_COLOR_PRIMARY = "android:colorPrimary";
 
     private static final int DEFAULT_GREY_LIGHT = Color.parseColor("#F5F5F5");
-    private static final int DEFAULT_GREY_DARK = Color.parseColor("#222222");
+    private static final int DEFAULT_GREY_DARK = Color.parseColor("#212121");
 
     private final PackageManager packageManager;
     private final String packageName;
