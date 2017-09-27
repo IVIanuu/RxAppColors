@@ -24,6 +24,8 @@ import android.support.annotation.NonNull;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 
+import static com.ivianuu.preconditions.Preconditions.checkNotNull;
+
 /**
  * Entry point to get colors
  */
@@ -38,6 +40,8 @@ public final class RxAppColors {
      */
     @CheckResult @NonNull
     public static Maybe<Integer> getColor(@NonNull Context context, @NonNull String packageName) {
+        checkNotNull(context, "context == null");
+        checkNotNull(packageName, "packageName == null");
         return GetColorForPackageMaybe.create(context, packageName);
     }
 
