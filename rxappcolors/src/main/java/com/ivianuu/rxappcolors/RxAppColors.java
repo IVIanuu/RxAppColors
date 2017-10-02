@@ -52,6 +52,8 @@ public final class RxAppColors {
     public static Single<Integer> getColor(@NonNull Context context,
                                            @NonNull String packageName,
                                            @ColorInt int fallbackColor) {
+        checkNotNull(context, "context == null");
+        checkNotNull(packageName, "packageName == null");
         return GetColorForPackageMaybe.create(context, packageName)
                 .defaultIfEmpty(fallbackColor)
                 .toSingle();
