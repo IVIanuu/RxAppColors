@@ -24,7 +24,7 @@ import android.support.annotation.NonNull;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 
-import static com.ivianuu.preconditions.Preconditions.checkNotNull;
+import static com.ivianuu.rxappcolors.Preconditions.checkNotNull;
 
 /**
  * Entry point to get colors
