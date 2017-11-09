@@ -68,8 +68,7 @@ final class GetColorForPackageMaybe implements MaybeOnSubscribe<Integer> {
         Resources resources = packageManager.getResourcesForApplication(packageName);
 
         // check if the resources are available
-        if (resources == null
-                && !e.isDisposed()) {
+        if (resources == null) {
             e.onComplete();
             return;
         }
@@ -84,8 +83,7 @@ final class GetColorForPackageMaybe implements MaybeOnSubscribe<Integer> {
                 int appCompatId = resources.getIdentifier(APP_COMPAT_COLOR_PRIMARY, ATTR, packageName);
                 if (appCompatId > 0) {
                     int color = getColorFromTheme(activityInfo.theme, appCompatId, resources);
-                    if (isValidColor(color)
-                            && !e.isDisposed()) {
+                    if (isValidColor(color)) {
                         e.onSuccess(color);
                         e.onComplete();
                         return;
@@ -95,8 +93,7 @@ final class GetColorForPackageMaybe implements MaybeOnSubscribe<Integer> {
                 int lollipopId = resources.getIdentifier(LOLLIPOP_COLOR_PRIMARY, ATTR, packageName);
                 if (lollipopId > 0) {
                     int color = getColorFromTheme(activityInfo.theme, lollipopId, resources);
-                    if (isValidColor(color)
-                            && !e.isDisposed()) {
+                    if (isValidColor(color)) {
                         e.onSuccess(color);
                         e.onComplete();
                         return;
@@ -112,8 +109,7 @@ final class GetColorForPackageMaybe implements MaybeOnSubscribe<Integer> {
             int appCompatId = resources.getIdentifier(APP_COMPAT_COLOR_PRIMARY, ATTR, packageName);
             if (appCompatId > 0) {
                 int color = getColorFromTheme(applicationInfo.theme, appCompatId, resources);
-                if (isValidColor(color)
-                        && !e.isDisposed()) {
+                if (isValidColor(color)) {
                     e.onSuccess(color);
                     e.onComplete();
                     return;
@@ -123,8 +119,7 @@ final class GetColorForPackageMaybe implements MaybeOnSubscribe<Integer> {
             int lollipopId = resources.getIdentifier(LOLLIPOP_COLOR_PRIMARY, ATTR, packageName);
             if (lollipopId > 0) {
                 int color = getColorFromTheme(applicationInfo.theme, lollipopId, resources);
-                if (isValidColor(color)
-                        && !e.isDisposed()) {
+                if (isValidColor(color)) {
                     e.onSuccess(color);
                     e.onComplete();
                     return;
@@ -142,17 +137,14 @@ final class GetColorForPackageMaybe implements MaybeOnSubscribe<Integer> {
 
             int color = PaletteUtil.getBestColor(palette, 0);
 
-            if (isValidColor(color)
-                    && !e.isDisposed()) {
+            if (isValidColor(color)) {
                 e.onSuccess(color);
                 e.onComplete();
                 return;
             }
         }
 
-        if (!e.isDisposed()) {
-            e.onComplete();
-        }
+        e.onComplete();
     }
 
     private int getColorFromTheme(int themeId, int attrId, Resources resources) {
